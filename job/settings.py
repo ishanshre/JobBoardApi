@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'django_phonenumbers',
     'phonenumber_field',
     'drf_yasg',
+
+    # localapps
+    'authentication.apps.AuthenticationConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,9 +139,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+AUTH_USER_MODEL = 'authentication.User'
+
 #cors settings
 
-CORS_ALLOWED_ORIGINS = ["*"]
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",

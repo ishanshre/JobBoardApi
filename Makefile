@@ -9,3 +9,6 @@ shell:
 
 test:
 	python manage.py test
+
+superuser:
+	python manage.py createsuperuser
