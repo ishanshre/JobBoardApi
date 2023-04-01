@@ -6,6 +6,15 @@ name = "pypi"
 [packages]
 django-cors-headers = "*"
 drf-yasg = "*"
+python-dotenv = "*"
+django = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+django-phonenumbers = "*"
+django-phonenumber-field = "*"
+djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
+pillow = "*"
 
 [dev-packages]
 

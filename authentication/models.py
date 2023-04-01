@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from phonenumber_field.modelfields import PhoneNumberField
 
 from authentication.sector import SECTOR_SELECT, COMPANY_TYPE
@@ -12,6 +14,14 @@ class User(AbstractUser):
     is_company = models.BooleanField(default=False)
     is_job_seeker = models.BooleanField(default=False)
     email_confirmed = models.BooleanField(default=False)
+
+    def get_tokens(self):
+        refresh = RefreshToken.for_user(self)
+        token = {
+            "access":str(refresh.access_token),
+            "refresh":str(refresh)
+        }
+        return token
 
 
 class Profile(models.Model):
