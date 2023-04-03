@@ -20,6 +20,19 @@ class UserInfoSerilaizer(serializers.ModelSerializer):
         fields = ['id','username','email']
 
 
+class CompanyProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyProfile
+        fields = ['id', 'title', 'logo', 'sector', 'type', 'latitude', 'longitude']
+
+
+class UserCompanyProfileSerializer(serializers.ModelSerializer):
+    profile = CompanyProfileSerializer(read_only=True)
+    class Meta:
+        model = User
+        fields = ['id','username','email','profile']
+
+
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=255, write_only=True)
     confirm_password = serializers.CharField(max_length=255, write_only=True)
