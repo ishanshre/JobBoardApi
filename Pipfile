@@ -15,6 +15,7 @@ django-phonenumbers = "*"
 django-phonenumber-field = "*"
 djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
 pillow = "*"
+drf-nested-routers = "*"
 
 [dev-packages]
 

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 # Create your models here.
 
 User = get_user_model()
@@ -42,3 +44,12 @@ class Job(models.Model):
         return self.title
 
 
+class JobApply(models.Model):
+    applied_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="jobs_applied")
+    applied_job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='job_seekers')
+    cover_letter = models.FileField(upload_to="user/coverLetter")
+    resume = models.FileField(upload_to="user/resume")
+    certificates = models.FileField(upload_to="user/certificates", blank=True, null=True)
+
+    def __str__(self):
+        return self.applied_by.username

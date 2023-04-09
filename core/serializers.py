@@ -1,8 +1,7 @@
 from rest_framework import serializers
 
-from core.models import Job
-
-from authentication.serializers import UserCompanyProfileSerializer
+from core.models import Job, JobApply
+from authentication.serializers import UserCompanyProfileSerializer, UserJobSeekerProfileSerializer
 
 from django.contrib.auth import get_user_model
 
@@ -56,3 +55,25 @@ class JobCreateSerializer(serializers.ModelSerializer):
         job = Job.objects.create(**validated_data,created_by=created_by)
         job.save()
         return job
+
+
+class JobApplySerializer(serializers.ModelSerializer):
+    applied_by = UserJobSeekerProfileSerializer()
+    class Meta:
+        model = JobApply
+        fields = ['id','applied_job','applied_by','cover_letter','resume','certificates']
+
+
+class JobApplyCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobApply
+        fields = ['cover_letter','resume','certificates']
+    
+    def create(self, validated_data):
+        user = self.context['user']
+        applied_job = self.context['applied_job']
+        job_apply = JobApply(**validated_data)
+        job_apply.applied_by = user
+        job_apply.applied_job = applied_job
+        job_apply.save()
+        return job_apply

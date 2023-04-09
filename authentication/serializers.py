@@ -23,14 +23,26 @@ class UserInfoSerilaizer(serializers.ModelSerializer):
 class CompanyProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyProfile
-        fields = ['id', 'title', 'logo', 'sector', 'type', 'latitude', 'longitude']
+        fields = ['id', 'company_name', 'logo', 'sector', 'type', 'latitude', 'longitude']
 
 
 class UserCompanyProfileSerializer(serializers.ModelSerializer):
     profile = CompanyProfileSerializer(read_only=True)
     class Meta:
         model = User
-        fields = ['id','username','email','profile']
+        fields = ['id','first_name','last_name','email','profile']
+
+class JobSeekerProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobSeekerProfile
+        fields = ['profile_pic','citizenship']
+
+
+class UserJobSeekerProfileSerializer(serializers.ModelSerializer):
+    profile = JobSeekerProfileSerializer(read_only=True)
+    class Meta:
+        model = User
+        fields = ['id','first_name','last_name','email','profile']
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):

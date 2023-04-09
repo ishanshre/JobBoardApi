@@ -62,8 +62,6 @@ class JobSeekerProfile(Profile):
     citizenship = models.ImageField(upload_to="user/jobseeker/identity", null=True, blank=True)
     passport = models.ImageField(upload_to="user/jobseeker/identity", null=True, blank=True)
     driving_license = models.ImageField(upload_to="user/jobseeker/identity", null=True, blank=True)
-    cover_letter = models.FileField(upload_to="user/jobseeker/resume", null=True, blank=True)
-    resume = models.FileField(upload_to="user/jobseeker/resume", null=True, blank=True)
     
     def __str__(self):
         return self.user.username
