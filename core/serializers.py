@@ -31,6 +31,18 @@ class JobSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
         ]
+
+class JobListSerializer(serializers.ModelSerializer):
+    created_by = UserCompanyProfileSerializer(read_only=True)
+    class Meta:
+        model = Job
+        fields = [
+            'id',
+            'title',
+            'created_by',
+            'created_at',
+            'updated_at'
+        ]
 class JobCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job

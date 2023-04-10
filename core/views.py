@@ -1,5 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
 
 from core.permissions import (
     IsCompanyAuthOrReadOnly,
@@ -10,6 +12,7 @@ from core.permissions import (
 from core.models import Job, JobApply
 from core.serializers import (
     JobSerializer,
+    JobListSerializer,
     JobCreateSerializer,
     JobApplySerializer,
     JobApplyCreateSerializer,
@@ -34,7 +37,11 @@ class JobModelViewSet(ModelViewSet):
         return {
             "user":self.request.user
         }
-
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.queryset
+        serializer = JobListSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class JobApplyModelViewSet(ModelViewSet):
     http_method_names = ['get','post','delete','options','head']

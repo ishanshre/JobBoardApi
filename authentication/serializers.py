@@ -27,10 +27,10 @@ class CompanyProfileSerializer(serializers.ModelSerializer):
 
 
 class UserCompanyProfileSerializer(serializers.ModelSerializer):
-    profile = CompanyProfileSerializer(read_only=True)
+    company_profile = CompanyProfileSerializer()
     class Meta:
         model = User
-        fields = ['id','first_name','last_name','email','profile']
+        fields = ['id','email','company_profile']
 
 class JobSeekerProfileSerializer(serializers.ModelSerializer):
     class Meta:
